@@ -1,40 +1,450 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <meta name="robots" content="noindex, nofollow" />
-    <title>Maintenance</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'none'; img-src 'self'; font-src 'self'; style-src 'unsafe-inline'; base-uri 'none'; form-action 'none'; object-src 'none'"
+    >
+    <meta name="referrer" content="no-referrer">
+    <meta
+      name="description"
+      content="Conrad Johnston is a computational chemist and scientific software architect working on quantum applications at Microsoft."
+    >
+    <meta name="robots" content="index, follow">
+    <meta name="theme-color" content="#f1f5f1">
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Conrad Johnston · Quantum Applications Architect">
+    <meta
+      property="og:description"
+      content="Computational chemistry, quantum resource estimation, and scientific software."
+    >
+    <meta property="og:url" content="https://conradjohnston.me/">
+    <link rel="canonical" href="https://conradjohnston.me/">
+    <title>Conrad Johnston · Quantum Applications Architect</title>
     <style>
+      @font-face {
+        font-family: "Zilla Slab Local";
+        src: url("./assets/fonts/ZillaSlab-Regular.ttf") format("truetype");
+        font-style: normal;
+        font-weight: 400;
+        font-display: swap;
+      }
+
+      @font-face {
+        font-family: "Zilla Slab Local";
+        src: url("./assets/fonts/ZillaSlab-SemiBold.ttf") format("truetype");
+        font-style: normal;
+        font-weight: 600;
+        font-display: swap;
+      }
+
+      :root {
+        color-scheme: light;
+        --paper: #f1f5f1;
+        --ink: #17211f;
+        --muted: #5f6d68;
+        --line: #c8d2cd;
+        --accent: #096b5b;
+        --second: #a4472c;
+        --serif: "Zilla Slab Local", Rockwell, serif;
+        --sans: "Avenir Next", Avenir, Futura, "Century Gothic", sans-serif;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+
       body {
-        font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
         margin: 0;
-        min-height: 100vh;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: var(--sans);
+        line-height: 1.62;
+        letter-spacing: 0;
+      }
+
+      a {
+        color: var(--accent);
+        text-decoration-thickness: 1px;
+        text-underline-offset: 0.2em;
+      }
+
+      a:hover,
+      a:focus-visible {
+        color: var(--second);
+      }
+
+      a:focus-visible {
+        outline: 2px solid var(--second);
+        outline-offset: 4px;
+      }
+
+      .skip-link {
+        position: fixed;
+        top: 10px;
+        left: 10px;
+        z-index: 10;
+        padding: 8px 10px;
+        background: var(--ink);
+        color: var(--paper);
+        transform: translateY(-160%);
+      }
+
+      .skip-link:focus {
+        color: var(--paper);
+        transform: translateY(0);
+      }
+
+      .page {
+        width: min(680px, calc(100% - 34px));
+        margin: 0 auto;
+        padding: 22px 0 38px;
+      }
+
+      .hero {
         display: grid;
-        place-items: center;
-        background: #0f172a;
-        color: #f8fafc;
+        gap: 18px;
+        padding: 54px 0 68px;
       }
-      main {
-        text-align: center;
-        max-width: 30rem;
-        padding: 2rem;
+
+      .hero-copy {
+        min-width: 0;
       }
-      h1 {
-        margin-bottom: 0.5rem;
-        font-size: 2rem;
-      }
-      p {
+
+      h1,
+      h2,
+      h3,
+      .role {
         margin: 0;
-        color: #cbd5f5;
+        font-family: var(--serif);
+        letter-spacing: 0;
+      }
+
+      h1,
+      h2,
+      h3 {
+        font-weight: 600;
+        line-height: 1.1;
+      }
+
+      h1 {
+        max-width: 13ch;
+        font-size: 2.5rem;
+      }
+
+      .role {
+        max-width: 36ch;
+        margin-top: 14px;
+        color: var(--muted);
+        font-size: 1.08rem;
+        line-height: 1.35;
+      }
+
+      .lede {
+        max-width: 650px;
+        margin: 18px 0 0;
+        font-size: 1.05rem;
+      }
+
+      .background {
+        max-width: 650px;
+        margin: 13px 0 0;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+
+      .identity {
+        display: block;
+        width: 260px;
+      }
+
+      .identity img {
+        display: block;
+        width: 260px;
+        height: 260px;
+        object-fit: cover;
+        border-radius: 4px;
+        filter: saturate(0.82) contrast(1.02);
+      }
+
+      .identity-meta {
+        margin-top: 14px;
+        color: var(--muted);
+        font-size: 0.78rem;
         line-height: 1.5;
+      }
+
+      .identity-links {
+        display: grid;
+        grid-template-columns: repeat(2, max-content);
+        gap: 4px 12px;
+        margin-top: 11px;
+        font-size: 0.8rem;
+      }
+
+      section {
+        padding: 54px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .section-intro {
+        margin-bottom: 28px;
+      }
+
+      .section-intro h2 {
+        font-size: 1.45rem;
+      }
+
+      .section-intro p {
+        max-width: 580px;
+        margin: 7px 0 0;
+        color: var(--muted);
+      }
+
+      .project-list {
+        display: grid;
+      }
+
+      .project {
+        display: grid;
+        grid-template-columns: 150px minmax(0, 1fr);
+        gap: 26px;
+        padding: 26px 0;
+        border-top: 1px solid var(--line);
+      }
+
+      .project-meta {
+        color: var(--muted);
+        font-size: 0.78rem;
+        text-transform: uppercase;
+      }
+
+      .project h3 {
+        font-size: 1.55rem;
+      }
+
+      .project p {
+        max-width: 620px;
+        margin: 9px 0 0;
+        color: var(--muted);
+      }
+
+      .project-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 15px;
+        margin-top: 12px;
+        font-size: 0.8rem;
+      }
+
+      footer {
+        display: flex;
+        justify-content: space-between;
+        gap: 20px;
+        padding-top: 18px;
+        border-top: 1px solid var(--line);
+        color: var(--muted);
+        font-size: 0.74rem;
+      }
+
+      @media (max-width: 540px) {
+        .page {
+          width: min(100% - 24px, 680px);
+          padding-top: 12px;
+        }
+
+        .hero {
+          padding-top: 42px;
+          padding-bottom: 54px;
+        }
+
+        h1 {
+          font-size: 2.35rem;
+        }
+
+        .role {
+          font-size: 1.04rem;
+        }
+
+        .lede {
+          font-size: 0.96rem;
+        }
+
+        .identity {
+          width: 210px;
+        }
+
+        .identity img {
+          width: 100%;
+          height: auto;
+        }
+
+        section {
+          padding: 46px 0;
+        }
+
+        .project {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+
+        footer {
+          flex-direction: column;
+          gap: 5px;
+        }
+      }
+
+      @media (max-width: 300px) {
+        .identity {
+          width: 160px;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+      }
+
+      @media print {
+        body {
+          background: #fff;
+        }
+
+        .identity img {
+          display: none;
+        }
+
+        .page {
+          width: 100%;
+          padding: 0;
+        }
+
+        section {
+          break-inside: avoid;
+        }
       }
     </style>
   </head>
   <body>
-    <main>
-      <h1>Under maintenance</h1>
-      <p>We’re doing some work behind the scenes. Please check back soon.</p>
-    </main>
+    <a class="skip-link" href="#main">Skip to content</a>
+    <div class="page">
+      <main id="main">
+        <header class="hero">
+          <div class="hero-copy">
+            <h1>Hi, I’m Conrad.</h1>
+            <p class="role">I build scientific software for chemistry and quantum computing.</p>
+            <p class="lede">
+              I’m a computational chemist and scientific software architect working on quantum
+              applications at Microsoft. I build tools for reproducible chemistry workflows and
+              study where fault-tolerant quantum computing can deliver useful scientific value.
+            </p>
+            <p class="background">
+              My background includes computational chemistry at PNNL, scientific workflow
+              infrastructure at EPFL, and a PhD in computational physics.
+            </p>
+          </div>
+          <aside class="identity" aria-label="Professional profiles">
+            <img
+              src="./assets/conrad-johnston.jpg"
+              alt="Conrad Johnston"
+              width="800"
+              height="800"
+            >
+            <div class="identity-meta">
+              Microsoft Quantum
+              <div class="identity-links">
+                <a rel="me" href="https://www.linkedin.com/in/conradjohnston/">LinkedIn</a>
+                <a rel="me" href="https://github.com/ConradJohnston">GitHub</a>
+                <a rel="me" href="https://scholar.google.com/citations?user=vjzdAWAAAAAJ">Google Scholar</a>
+                <a rel="me" href="https://orcid.org/0000-0003-3482-9792">ORCID</a>
+              </div>
+            </div>
+          </aside>
+        </header>
+
+        <section id="work" aria-labelledby="work-heading">
+          <div class="section-intro">
+            <h2 id="work-heading">Selected work</h2>
+            <p>
+              Projects spanning quantum chemistry, scientific software, and molecular simulation.
+            </p>
+          </div>
+
+          <div class="project-list">
+            <article class="project">
+              <div class="project-meta">Microsoft</div>
+              <div>
+                <h3>QDK/Chemistry</h3>
+                <p>
+                  As one of the code owners, I help architect and build a modular toolkit that
+                  connects classical electronic-structure software with quantum-computing
+                  frameworks for reproducible quantum chemistry experiments.
+                </p>
+                <div class="project-links">
+                  <a href="https://github.com/microsoft/qdk-chemistry">Repository</a>
+                  <a href="https://arxiv.org/abs/2601.15253">Technical paper</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project">
+              <div class="project-meta">PNNL</div>
+              <div>
+                <h3>Enzymatic catalysis</h3>
+                <p>
+                  At PNNL, I developed a classical force field that enabled million-atom molecular
+                  dynamics simulations of the CODH/ACS enzyme complex. I then designed a bead-based
+                  method to calculate free-energy profiles for gas transport through its dynamic
+                  protein tunnels.
+                </p>
+              </div>
+            </article>
+
+            <article class="project">
+              <div class="project-meta">EPFL</div>
+              <div>
+                <h3>AiiDA</h3>
+                <p>
+                  I contributed as a core developer to an open-source workflow manager for
+                  automated, reproducible computational science, with data provenance and
+                  high-performance computing support.
+                </p>
+                <div class="project-links">
+                  <a href="https://www.aiida.net/">Project</a>
+                  <a href="https://doi.org/10.1038/s41597-020-00638-4">Scientific Data paper</a>
+                </div>
+              </div>
+            </article>
+
+            <article class="project">
+              <div class="project-meta">EPFL</div>
+              <div>
+                <h3>AiiDA-Defects</h3>
+                <p>
+                  I designed and shipped an open-source plugin for automated, high-throughput
+                  charged-defect calculations and reproducible electronic-structure workflows.
+                </p>
+                <div class="project-links">
+                  <a href="https://doi.org/10.1088/2516-1075/ace014">Publication</a>
+                </div>
+              </div>
+            </article>
+          </div>
+        </section>
+
+      </main>
+
+      <footer>
+        <span>Conrad Johnston</span>
+        <span>Last updated July 2026</span>
+      </footer>
+    </div>
   </body>
 </html>
